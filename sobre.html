@@ -1,102 +1,276 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sobre el Proyecto | El viaje para volver a mí</title>
-  <meta name="description" content="Conoce la historia, misión, visión y valores detrás del proyecto El viaje para volver a mí. Un espacio donde el arte y la empatía ayudan a sanar.">
-  <link rel="stylesheet" href="css/style.css">
-</head>
+  <style>
+    :root {
+      --gris: #C9C8D2;
+      --beige: #E7BFA1;
+      --rosa: #D49EAF;
+      --morado: #876F8D;
+      --verde1: #C1E1AF;
+      --verde2: #AAC893;
+      --blanco: #fff;
+      --negro: #222;
+      --sombra: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --transicion: 0.6s ease;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--gris);
+      color: var(--negro);
+      overflow-x: hidden;
+    }
 
+    /* NAVBAR */
+    .navbar {
+      background: var(--blanco);
+      box-shadow: var(--sombra);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar .logo {
+      font-weight: 700;
+      color: var(--morado);
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--negro);
+      position: relative;
+    }
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: var(--morado);
+    }
+
+    /* HERO */
+    .sub-hero {
+      background: linear-gradient(120deg, var(--rosa), var(--beige));
+      color: var(--blanco);
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      border-radius: 0 0 32px 32px;
+      box-shadow: var(--sombra);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity var(--transicion), transform var(--transicion);
+    }
+    .sub-hero.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .sub-hero h1 { margin: 0; font-size: 2rem; }
+
+    /* SECCIONES */
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .bloque {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      background: var(--beige);
+      border-radius: 16px;
+      box-shadow: var(--sombra);
+      padding: 1.5rem;
+      transition: transform var(--transicion), opacity var(--transicion);
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .bloque.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .bloque img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .texto h2 {
+      color: var(--morado);
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+    }
+    .texto p, .texto li {
+      line-height: 1.7;
+      color: #333;
+    }
+    .texto ul {
+      padding-left: 1.2rem;
+    }
+
+    /* Misión y visión juntas */
+.bloque-duo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  background: var(--beige);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: var(--sombra);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity var(--transicion), transform var(--transicion);
+}
+.bloque-duo.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.card {
+  flex: 1;
+  min-width: 280px;
+  background: var(--beige); /* mismo color que el contenedor */
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: none; /* elimina sombra para unificar */
+}
+.card h2 {
+  color: var(--morado);
+  margin-top: 0;
+}
+
+
+    /* FOOTER */
+    footer {
+      background: var(--morado);
+      color: var(--blanco);
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      border-radius: 24px 24px 0 0;
+      margin-top: 3rem;
+    }
+    footer a {
+      color: var(--beige);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 800px) {
+      .bloque {
+        grid-template-columns: 1fr;
+      }
+      .bloque-duo {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
 <body>
 
-  <!-- MENÚ DE NAVEGACIÓN -->
+  <!-- NAVBAR -->
   <nav class="navbar">
     <a href="index.html" class="logo">El viaje para volver a mí</a>
     <ul class="nav-links">
       <li><a href="index.html">Inicio</a></li>
-      <li><a href="sobre.html" class="active">Sobre el proyecto</a></li>
+      <li><a href="sobre.html" class="active">Sobre el Proyecto</a></li>
+      <li><a href="padres.html">Espacio para padres</a></li>
       <li><a href="opiniones.html">Opiniones</a></li>
-      <li><a href="padres.html">Guía para padres</a></li>
     </ul>
   </nav>
 
-  <!-- SECCIÓN PRINCIPAL -->
+  <!-- HERO -->
   <header class="sub-hero">
     <h1>Sobre el proyecto</h1>
     <p>Descubre quiénes somos y el propósito detrás de esta historia.</p>
   </header>
 
-  <main id="sobre">
+  <!-- CONTENIDO -->
+  <main>
     <!-- QUIÉNES SOMOS -->
-    <section class="sobre-seccion">
-      <h2>¿Quiénes somos?</h2>
-      <p>
-        Somos un grupo de soñadoras y creadoras que creemos en el poder de las historias para sanar. 
-        Desde el diseño y la ilustración, unimos nuestras voces y talentos para dar vida a 
-        <strong>El viaje para volver a mí</strong>, un proyecto que nace con la intención de acompañar a los niños 
-        en los momentos donde las palabras parecen quedarse cortas.
-      </p>
+    <section class="bloque visible">
+      <img src="assets/img/Sobre/quines somos.png" alt="Equipo creativo" />
+      <div class="texto">
+        <h2>¿Quiénes somos?</h2>
+        <p>
+          Somos un grupo de soñadoras y creadoras que creemos en el poder de las historias para sanar. Desde el diseño y la ilustración, unimos nuestras voces y talentos para dar vida a <strong>El viaje para volver a mí</strong>, un proyecto que nace con la intención de acompañar a los niños en los momentos donde las palabras parecen quedarse cortas.
+        </p>
+      </div>
     </section>
 
-    <!-- MISIÓN -->
-    <section class="sobre-seccion">
-      <h2>Nuestra misión</h2>
-      <p>
-        Guiar a los niños y sus familias en la comprensión de las emociones que surgen frente a la pérdida. 
-        A través de un cuento ilustrado y un espacio digital, buscamos ofrecer herramientas simbólicas y visuales 
-        que fortalezcan la inteligencia emocional, la empatía y la resiliencia.
-      </p>
-    </section>
-
-    <!-- VISIÓN -->
-    <section class="sobre-seccion">
-      <h2>Nuestra visión</h2>
-      <p>
-        Soñamos con un mundo donde el duelo en la infancia no se silencie, sino que se reconozca como parte de la vida. 
-        Un mundo donde los niños puedan nombrar lo que sienten, los adultos encuentren un puente para acompañarlos 
-        y juntos construyan caminos hacia la sanación emocional.
-      </p>
+    <!-- MISIÓN Y VISIÓN -->
+    <section class="bloque-duo">
+      <div class="card">
+        <h2>Nuestra misión</h2>
+        <p>
+          Guiar a los niños y sus familias en la comprensión de las emociones que surgen frente a la pérdida. A través de un cuento ilustrado y un espacio digital, buscamos ofrecer herramientas simbólicas y visuales que fortalezcan la inteligencia emocional, la empatía y la resiliencia.
+        </p>
+      </div>
+      <div class="card">
+        <h2>Nuestra visión</h2>
+        <p>
+          Soñamos con un mundo donde el duelo en la infancia no se silencie, sino que se reconozca como parte de la vida. Un mundo donde los niños puedan nombrar lo que sienten, los adultos encuentren un puente para acompañarlos y juntos construyan caminos hacia la sanación emocional.
+        </p>
+      </div>
     </section>
 
     <!-- VALORES -->
-    <section class="sobre-seccion">
-      <h2>Nuestros valores</h2>
-      <ul class="valores-lista">
-        <li><strong>Creatividad:</strong> transformar lo intangible en imágenes y relatos que hablen directo al corazón.</li>
-        <li><strong>Empatía:</strong> escuchar y acompañar sin juicios, validando cada emoción.</li>
-        <li><strong>Compromiso:</strong> crear un recurso confiable y sensible que sirva tanto en el hogar como en la escuela o en la consulta.</li>
-        <li><strong>Colaboración:</strong> unir el arte, la psicología y la educación para dar vida a un proyecto con propósito.</li>
-      </ul>
+    <section class="bloque reverse">
+      <img src="assets/img/Sobre/valores.png" alt="Valores del equipo" />
+      <div class="texto">
+        <h2>Nuestros valores</h2>
+        <ul>
+          <li><strong>Creatividad:</strong> transformar lo intangible en imágenes y relatos que hablen directo al corazón.</li>
+          <li><strong>Empatía:</strong> escuchar y acompañar sin juicios, validando cada emoción.</li>
+          <li><strong>Compromiso:</strong> crear un recurso confiable y sensible que sirva tanto en el hogar como en la escuela o en la consulta.</li>
+          <li><strong>Colaboración:</strong> unir el arte, la psicología y la educación para dar vida a un proyecto con propósito.</li>
+        </ul>
+      </div>
     </section>
 
     <!-- HISTORIA -->
-    <section class="sobre-seccion historia">
-      <h2>Nuestra historia</h2>
-      <p>
-        Este proyecto nació de una pregunta sencilla pero poderosa: <em>¿cómo explicar el duelo a un niño?</em>  
-        En el intento de responderla, descubrimos que los cuentos, las metáforas y los personajes podían convertirse en guías.  
-        Así, Sky apareció en nuestras páginas: un niño que, con un bolso y mucha confusión, se enfrenta a la negación, la ira, la tristeza y, poco a poco, encuentra la aceptación.
-      </p>
-      <p>
-        <strong>El viaje para volver a mí</strong> no es solo un libro ni una página web; es un puente.  
-        Un abrazo convertido en ilustraciones, palabras y experiencias que invitan a reconocer que cada emoción, incluso la más dolorosa, guarda una llave para seguir adelante.
-      </p>
+    <section class="bloque">
+      <img src="assets/img/Sobre/IMG_0384.jpeg" alt="Historia de Sky" />
+      <div class="texto">
+        <h2>Nuestra historia</h2>
+        <p>
+          Este proyecto nació de una pregunta sencilla pero poderosa: <em>¿cómo explicar el duelo a un niño?</em> En el intento de responderla, descubrimos que los cuentos, las metáforas y los personajes podían convertirse en guías. Así, Sky apareció en nuestras páginas: un niño que, con un bolso y mucha confusión, se enfrenta a la negación, la ira, la tristeza y, poco a poco, encuentra la aceptación.
+        </p>
+        <p>
+          <strong>El viaje para volver a mí</strong> no es solo un libro ni una página web; es un puente. Un abrazo convertido en ilustraciones, palabras y experiencias que invitan a reconocer que cada emoción, incluso la más dolorosa, guarda una llave para seguir adelante.
+        </p>
+      </div>
     </section>
   </main>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-content">
-      <div class="social">
-        <p>Síguenos:</p>
-        <a href="#">Facebook</a> | <a href="#">Instagram</a>
-      </div>
-      <p class="correo">Contacto: info@elviajeparami.com</p>
-      <p class="copyright">© 2025 El viaje para volver a mí. Todos los derechos reservados.</p>
-    </div>
+    <p>Síguenos en <a href="#">Facebook</a> y <a href="#">Instagram</a></p>
+    <p>Contacto: info@elviajeparami.com</p>
+    <p>© 2025 El viaje para volver a mí. Todos los derechos reservados.</p>
   </footer>
 
-  <script src="js/main.js"></script>
+  <!-- ANIMACIONES -->
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.bloque, .bloque-duo, .sub-hero').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
