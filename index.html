@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>El viaje para volver a mí</title>
-  <!-- CSS embebido -->
   <style>
-    /* ==========================
-       PALETA Y VARIABLES
-    ========================== */
     :root {
       --gris: #C9C8D2;
       --beige: #E7BFA1;
@@ -21,19 +17,17 @@
       --sombra: 0 4px 24px rgba(135, 111, 141, 0.08);
       --transicion: 0.5s cubic-bezier(.4,0,.2,1);
     }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: var(--gris);
+      background: linear-gradient(180deg, var(--gris) 10%, #fdf9f7 100%);
       color: var(--negro);
-      min-height: 100vh;
+      overflow-x: hidden;
       scroll-behavior: smooth;
     }
-    body, html {
-      width: 100vw;
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
+
+    /* NAVBAR */
     .main-nav {
       background: var(--blanco);
       box-shadow: 0 2px 12px rgba(135, 111, 141, 0.06);
@@ -53,7 +47,7 @@
     .logo {
       font-weight: 700;
       color: var(--morado);
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       letter-spacing: 0.5px;
     }
     .nav-links {
@@ -63,15 +57,10 @@
       margin: 0;
       padding: 0;
     }
-    .nav-links li {
-      display: inline-block;
-    }
     .nav-links a {
       color: var(--negro);
       text-decoration: none;
       font-weight: 500;
-      font-size: 1rem;
-      padding: 0.3rem 0.2rem;
       position: relative;
       transition: color 0.2s;
     }
@@ -94,202 +83,211 @@
     .nav-links a.active::after {
       width: 100%;
     }
+
+    /* HERO */
     .hero {
-      background: linear-gradient(120deg, var(--rosa) 60%, var(--beige) 100%);
+      background: linear-gradient(120deg, var(--rosa), var(--beige), var(--rosa));
+      background-size: 300% 300%;
+      animation: heroGradient 10s ease infinite;
       color: var(--blanco);
       text-align: center;
-      padding: 4rem 1rem 2.5rem 1rem;
-      box-shadow: var(--sombra);
-      border-radius: 0 0 32px 32px;
+      padding: 6rem 1rem 3.5rem 1rem;
+      border-radius: 0 0 40px 40px;
+      box-shadow: 0 6px 20px rgba(135, 111, 141, 0.25);
       position: relative;
     }
-    .hero-content {
-      max-width: 700px;
-      margin: 0 auto;
+    @keyframes heroGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      font-size: 3rem;
       font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .hero em {
-      font-style: italic;
-      font-weight: 600;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
     .hero p {
-      font-size: 1.15rem;
-      margin: 0 auto 1rem auto;
-      line-height: 1.6;
-      max-width: 600px;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin: 0 auto 1.2rem auto;
+      max-width: 700px;
+      color: #fffdfd;
     }
+    .btn-hero {
+      display: inline-block;
+      background: var(--blanco);
+      color: var(--morado);
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      margin-top: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .btn-hero:hover {
+      background: var(--rosa);
+      color: var(--blanco);
+      transform: scale(1.08);
+    }
+
+    /* PERSONAJES */
     #personajes {
-      background: var(--beige);
-      margin: 2rem auto 0 auto;
-      border-radius: 24px;
-      box-shadow: var(--sombra);
-      padding: 2.5rem 1rem;
+      background: #F2E1B7;
+      margin: 3rem auto;
+      border-radius: 32px;
+      box-shadow: 0 4px 30px rgba(135, 111, 141, 0.15);
+      padding: 3rem 2rem;
       max-width: 1200px;
-      width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
-      overflow-x: visible;
     }
     #personajes h2 {
       color: var(--morado);
-      font-size: 2rem;
-      margin-bottom: 2rem;
+      font-size: 2.2rem;
       text-align: center;
-      font-weight: 700;
+      position: relative;
+    }
+    #personajes h2::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--rosa);
+      border-radius: 2px;
+      margin: 0.7rem auto 1rem auto;
     }
     .personajes-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
       justify-items: center;
       padding: 1rem 0;
     }
     .personaje {
-      background: var(--blanco);
-      border-radius: 18px;
-      box-shadow: 0 2px 16px rgba(135, 111, 141, 0.10);
-      padding: 1.2rem 1rem 1.5rem 1rem;
-      width: 100%;
-      max-width: 320px;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-      outline: none;
-      position: relative;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #fff, #f9f6f7);
+      transition: transform 0.4s, box-shadow 0.4s;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
       overflow: hidden;
-      min-height: 420px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0 auto;
+      position: relative;
     }
-    @media (max-width: 1100px) {
-      .personajes-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-      }
+    .personaje::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(212,158,175,0.12), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
     }
-    @media (max-width: 700px) {
-      .personajes-grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-        padding: 0.5rem 0;
-      }
-      .personaje {
-        max-width: 98vw;
-        min-width: 0;
-      }
+    .personaje:hover::before {
+      opacity: 1;
     }
-    .personaje:focus {
-      box-shadow: 0 0 0 3px var(--rosa);
-    }
-    .personaje:hover, .personaje:focus {
-      transform: translateY(-10px) scale(1.04);
-      box-shadow: 0 8px 32px rgba(135, 111, 141, 0.18);
+    .personaje:hover {
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(135, 111, 141, 0.25);
     }
     .personaje-img {
-      position: relative;
       width: 150px;
       height: 220px;
-      margin: 0 auto 0.5rem auto;
+      margin: 1rem auto;
+      position: relative;
     }
     .personaje-img img {
       position: absolute;
       width: 100%;
       height: 100%;
-      left: 0; top: 0;
       object-fit: contain;
-      transition: opacity 0.5s cubic-bezier(.4,0,.2,1);
-      pointer-events: none;
-      user-select: none;
+      transition: opacity 0.5s, transform 0.5s;
     }
     .personaje-img img.color {
       opacity: 0;
     }
-    .personaje:hover .personaje-img img.color,
-    .personaje:focus .personaje-img img.color {
+    .personaje:hover .personaje-img img.color {
       opacity: 1;
+      transform: scale(1.05);
     }
-    .personaje:hover .personaje-img img.sombra,
-    .personaje:focus .personaje-img img.sombra {
+    .personaje:hover .personaje-img img.sombra {
       opacity: 0;
     }
     .personaje-info {
-      margin-top: 0.5rem;
+      padding: 0 1rem 1rem 1rem;
       text-align: center;
-      padding: 0 0.5rem;
     }
     .personaje-info strong {
       display: block;
       color: var(--morado);
-      font-size: 1.15rem;
-      margin-bottom: 0.3rem;
-      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 0.4rem;
     }
     .personaje-info p {
       color: #444;
       font-size: 1rem;
-      margin: 0;
-      min-height: 60px;
       font-style: italic;
+      line-height: 1.6;
     }
+
+    /* SINOPSIS */
     #sinopsis {
-      background: var(--rosa);
+      background: linear-gradient(135deg, var(--rosa) 40%, var(--morado) 100%);
+      border-radius: 32px;
       color: var(--blanco);
-      border-radius: 24px;
-      box-shadow: var(--sombra);
-      margin: 2rem auto 0 auto;
-      padding: 2.5rem 1rem;
-      max-width: 900px;
+      box-shadow: 0 6px 24px rgba(135, 111, 141, 0.3);
+      margin: 3rem auto;
+      padding: 3rem 2rem;
+      max-width: 950px;
+      position: relative;
+      overflow: hidden;
+    }
+    #sinopsis::before {
+      content: "";
+      position: absolute;
+      width: 250%;
+      height: 250%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 60%);
+      animation: sinopsisGlow 10s infinite linear;
+    }
+    @keyframes sinopsisGlow {
+      0% { transform: translate(-20%, -20%) rotate(0deg); }
+      100% { transform: translate(20%, 20%) rotate(360deg); }
     }
     #sinopsis h2 {
-      color: var(--blanco);
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+      font-size: 2.3rem;
       text-align: center;
-      font-weight: 700;
+      margin-bottom: 1.8rem;
+      position: relative;
+      z-index: 1;
     }
     .sinopsis-flex {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 2.5rem;
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
     }
     .sinopsis-texto {
       flex: 2 1 320px;
-      font-size: 1.1rem;
-      line-height: 1.7;
-    }
-    .sinopsis-texto em {
-      font-weight: 600;
-      font-style: italic;
-    }
-    .sinopsis-qr {
-      flex: 1 1 120px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-size: 1.15rem;
+      line-height: 1.8;
     }
     .sinopsis-qr img {
-      width: 120px;
-      height: 120px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(135, 111, 141, 0.10);
+      width: 130px;
+      height: 130px;
+      border-radius: 16px;
       background: var(--blanco);
       padding: 0.5rem;
+      box-shadow: 0 2px 12px rgba(255,255,255,0.4);
     }
+
+    /* FOOTER */
     footer {
       background: var(--morado);
       color: var(--blanco);
       text-align: center;
-      padding: 2rem 1rem 1rem 1rem;
-      border-radius: 24px 24px 0 0;
-      margin-top: 2rem;
+      padding: 3rem 1rem 1rem 1rem;
+      border-radius: 32px 32px 0 0;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
     }
     .footer-social {
       margin-bottom: 1rem;
@@ -300,24 +298,17 @@
       font-size: 1.1rem;
     }
     .footer-social span {
-      margin-right: 0.5rem;
       color: var(--beige);
       font-weight: 600;
     }
-    .footer-social a {
-      display: inline-block;
-      margin: 0 0.2rem;
-      vertical-align: middle;
-    }
     .footer-social img {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       filter: brightness(0) invert(1);
-      transition: filter 0.2s, transform 0.2s;
+      transition: transform 0.3s;
     }
     .footer-social a:hover img {
-      filter: brightness(1) invert(0.5) sepia(1) hue-rotate(270deg) saturate(2);
-      transform: scale(1.15) rotate(-8deg);
+      transform: scale(1.2) rotate(-8deg);
     }
     footer a {
       color: var(--beige);
@@ -328,83 +319,21 @@
       font-size: 0.95rem;
       color: #e7e7e7;
     }
-    section, .hero, #sinopsis, #personajes {
+
+    /* EFECTO APARICIÓN */
+    section, .hero, footer {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity var(--transicion), transform var(--transicion);
+      transition: opacity 1s ease, transform 1s ease;
     }
-    section.visible, .hero.visible, #sinopsis.visible, #personajes.visible {
+    section.visible, .hero.visible, footer.visible {
       opacity: 1;
-      transform: none;
+      transform: translateY(0);
     }
-    @media (max-width: 900px) {
-      .nav-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-        padding: 0.7rem 0.7rem;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-        gap: 0.7rem;
-      }
-      .logo {
-        margin-bottom: 0.3rem;
-      }
-      .personajes-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 1.2rem;
-      }
-      .sinopsis-flex {
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-      #personajes, #sinopsis {
-        padding: 1.5rem 0.5rem;
-      }
-    }
-    @media (max-width: 600px) {
-      .personajes-grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-        width: 100%;
-        margin: 0;
-      }
-      .personaje {
-        max-width: 98vw;
-        min-width: 0;
-        margin: 0 auto;
-      }
-      .sinopsis-flex {
-        flex-direction: column;
-        gap: 1.2rem;
-        width: 100%;
-      }
-      .sinopsis-qr img {
-        width: 90px;
-        height: 90px;
-      }
-      .hero {
-        padding: 2.5rem 0.5rem 1.5rem 0.5rem;
-      }
-      .nav-container {
-        padding: 0.7rem 0.3rem;
-        box-sizing: border-box;
-        width: 100vw;
-        max-width: 100vw;
-      }
-      .main-nav {
-        width: 100vw;
-        max-width: 100vw;
-      }
-    }
-    section, .hero, footer {
-      box-sizing: border-box;
-      width: 100%;
-      max-width: 100vw;
-      margin-left: auto;
-      margin-right: auto;
-      overflow-x: hidden;
+
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 2.2rem; }
+      .sinopsis-qr img { width: 100px; height: 100px; }
     }
   </style>
 </head>
@@ -422,123 +351,34 @@
     </div>
   </nav>
 
-  <!-- HEADER / BIENVENIDA -->
+  <!-- HERO -->
   <header class="hero" id="inicio">
     <div class="hero-content">
       <h1>Bienvenidos a <em>El viaje para volver a mí</em></h1>
-      <p>
-        Este es un espacio creado para acompañar a niños, familias y educadores en la comprensión de las emociones que surgen frente a una pérdida. 
-        A través de la historia de Sky y sus encuentros con personajes simbólicos, la web invita a descubrir, reflexionar y aprender de manera segura y cercana sobre las etapas del duelo.
-      </p>
-      <p>
-        Aquí encontrarás personajes, recursos y actividades que te ayudarán a transformar el dolor en aprendizaje y a reconocer que todas las emociones tienen un lugar y un sentido.
-      </p>
+      <p>Un espacio para acompañar a niños, familias y educadores en la comprensión de las emociones frente a la pérdida. A través de la historia de Sky, cada paso nos acerca a sanar desde el amor.</p>
+      <a href="https://drive.google.com/file/d/1Bt_JfBOx9Kb30uXAKpym2r3ULrZmhWgj/view?usp=sharing" class="btn-hero">Leer el cuento</a>
     </div>
   </header>
 
+  <!-- PERSONAJES -->
   <main>
-    <!-- SECCIÓN: PERSONAJES -->
     <section id="personajes">
       <h2>Conoce a nuestros personajes</h2>
       <div class="personajes-grid">
-
-        <!-- Sky -->
-        <div class="personaje" tabindex="0">
-          <div class="personaje-img">
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_sky%20.png" alt="Sky sombra" class="sombra" />
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_sky%20.png" alt="Sky color" class="color" />
-          </div>
-          <div class="personaje-info">
-            <strong>Sky</strong>
-            <p>“Soy Sky y tengo 9 años. Mi mundo cambió de repente y ya nada se siente igual. A veces me pierdo entre emociones que no entiendo, pero sé que este viaje me ayudará a encontrar respuestas. Llevo mi mochila conmigo, porque en cada paso guardo algo que me acerca a comprender lo que siento.”</p>
-          </div>
-        </div>
-
-        <!-- Negación -->
-        <div class="personaje" tabindex="0">
-          <div class="personaje-img">
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Negacion.png" alt="Negación sombra" class="sombra" />
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Negacion.png" alt="Negación color" class="color" />
-          </div>
-          <div class="personaje-info">
-            <strong>Negación</strong>
-            <p>“Yo soy Negación. Prefiero esconder lo que duele y hacer como que nada pasó. A veces te protejo del dolor, pero también puedo detenerte si no te atreves a mirar la verdad.”</p>
-          </div>
-        </div>
-
-        <!-- Verdad -->
-        <div class="personaje" tabindex="0">
-          <div class="personaje-img">
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Verdad.png" alt="Verdad sombra" class="sombra" />
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Verdad.png" alt="Verdad color" class="color" />
-          </div>
-          <div class="personaje-info">
-            <strong>Verdad</strong>
-            <p>“Me llamo Verdad. No siempre soy fácil de escuchar, pero traigo claridad. Estoy aquí para recordarte lo que ocurrió, aunque duela, porque solo aceptando lo real podemos avanzar.”</p>
-          </div>
-        </div>
-
-        <!-- Ira -->
-        <div class="personaje" tabindex="0">
-          <div class="personaje-img">
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_ira.png" alt="Ira sombra" class="sombra" />
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_ira.png" alt="Ira color" class="color" />
-          </div>
-          <div class="personaje-info">
-            <strong>Ira</strong>
-            <p>“Soy Ira, y me hago sentir con fuerza. Grito, golpeo y ardo por dentro cuando algo no es justo. Aunque a veces asusto, también te enseño que está bien soltar lo que te enoja.”</p>
-          </div>
-        </div>
-
-        <!-- Negociación -->
-        <div class="personaje" tabindex="0">
-          <div class="personaje-img">
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Negociacion.png" alt="Negociación sombra" class="sombra" />
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Negociacion.png" alt="Negociación color" class="color" />
-          </div>
-          <div class="personaje-info">
-            <strong>Negociación</strong>
-            <p>“Yo soy Negociación. Te lleno de ‘y si hubiera…’ y ‘tal vez si hago esto…’. Parezco dar esperanza, pero también puedo confundirte con caminos que no existen.”</p>
-          </div>
-        </div>
-
-        <!-- Depresión -->
-        <div class="personaje" tabindex="0">
-          <div class="personaje-img">
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Depresion.png" alt="Depresión sombra" class="sombra" />
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Depresion.png" alt="Depresión color" class="color" />
-          </div>
-          <div class="personaje-info">
-            <strong>Depresión</strong>
-            <p>“Me llamo Depresión. Camino despacio, con el corazón pesado y la mirada baja. Traigo lluvia y cansancio, pero también un silencio donde puedes escucharte a ti mismo.”</p>
-          </div>
-        </div>
-
-        <!-- Aceptación -->
-        <div class="personaje" tabindex="0">
-          <div class="personaje-img">
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Aceptacion.png" alt="Aceptación sombra" class="sombra" />
-            <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Aceptacion.png" alt="Aceptación color" class="color" />
-          </div>
-          <div class="personaje-info">
-            <strong>Aceptación</strong>
-            <p>“Soy Aceptación. No borro el dolor, pero lo transformo en calma. Llego cuando entiendes que, aunque lo que pasó duele, puedes seguir adelante con una nueva luz en tu interior.”</p>
-          </div>
-        </div>
+        <!-- Aquí permanecen los personajes como en tu versión original -->
+        <!-- ... (puedes mantener los mismos divs de personajes sin cambios) -->
+         <!-- Sky --> <div class="personaje" tabindex="0"> 
+          <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_sky%20.png" alt="Sky sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_sky%20.png" alt="Sky color" class="color" /> </div> <div class="personaje-info"> <strong>Sky</strong> <p>“Soy Sky y tengo 9 años. Mi mundo cambió de repente y ya nada se siente igual. A veces me pierdo entre emociones que no entiendo, pero sé que este viaje me ayudará a encontrar respuestas. Llevo mi mochila conmigo, porque en cada paso guardo algo que me acerca a comprender lo que siento.”</p> </div> </div> <!-- Negación --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Negacion.png" alt="Negación sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Negacion.png" alt="Negación color" class="color" /> </div> <div class="personaje-info"> <strong>Negación</strong> <p>“Yo soy Negación. Prefiero esconder lo que duele y hacer como que nada pasó. A veces te protejo del dolor, pero también puedo detenerte si no te atreves a mirar la verdad.”</p> </div> </div> <!-- Verdad --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Verdad.png" alt="Verdad sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Verdad.png" alt="Verdad color" class="color" /> </div> <div class="personaje-info"> <strong>Verdad</strong> <p>“Me llamo Verdad. No siempre soy fácil de escuchar, pero traigo claridad. Estoy aquí para recordarte lo que ocurrió, aunque duela, porque solo aceptando lo real podemos avanzar.”</p> </div> </div> <!-- Ira --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_ira.png" alt="Ira sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_ira.png" alt="Ira color" class="color" /> </div> <div class="personaje-info"> <strong>Ira</strong> <p>“Soy Ira, y me hago sentir con fuerza. Grito, golpeo y ardo por dentro cuando algo no es justo. Aunque a veces asusto, también te enseño que está bien soltar lo que te enoja.”</p> </div> </div> <!-- Negociación --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Negociacion.png" alt="Negociación sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Negociacion.png" alt="Negociación color" class="color" /> </div> <div class="personaje-info"> <strong>Negociación</strong> <p>“Yo soy Negociación. Te lleno de ‘y si hubiera…’ y ‘tal vez si hago esto…’. Parezco dar esperanza, pero también puedo confundirte con caminos que no existen.”</p> </div> </div> <!-- Depresión --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Depresion.png" alt="Depresión sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Depresion.png" alt="Depresión color" class="color" /> </div> <div class="personaje-info"> <strong>Depresión</strong> <p>“Me llamo Depresión. Camino despacio, con el corazón pesado y la mirada baja. Traigo lluvia y cansancio, pero también un silencio donde puedes escucharte a ti mismo.”</p> </div> </div> <!-- Aceptación --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Aceptacion.png" alt="Aceptación sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Aceptacion.png" alt="Aceptación color" class="color" /> </div> <div class="personaje-info"> <strong>Aceptación</strong> <p>“Soy Aceptación. No borro el dolor, pero lo transformo en calma. Llego cuando entiendes que, aunque lo que pasó duele, puedes seguir adelante con una nueva luz en tu interior.”</p> </div> </div> </div> </section>
       </div>
     </section>
 
-    <!-- SECCIÓN: SINOPSIS -->
+    <!-- SINOPSIS -->
     <section id="sinopsis">
       <h2>Sinopsis corta</h2>
       <div class="sinopsis-flex">
         <div class="sinopsis-texto">
-          <p>
-            <em>El viaje para volver a mí</em> cuenta la historia de Sky, un niño que atraviesa un mundo lleno de emociones para comprender la pérdida y reencontrarse consigo mismo.
-          </p>
-          <p>
-            Escanea este QR y acompáñalo en su recorrido por la negación, la ira, la tristeza y la aceptación, descubriendo que cada sentimiento tiene una clave para sanar.
-          </p>
+          <p><em>El viaje para volver a mí</em> cuenta la historia de Sky, un niño que atraviesa un mundo lleno de emociones para comprender la pérdida y reencontrarse consigo mismo.</p>
+          <p>Escanea este QR y acompáñalo en su recorrido por la negación, la ira, la tristeza y la aceptación, descubriendo que cada sentimiento tiene una clave para sanar.</p>
         </div>
         <div class="sinopsis-qr">
           <img src="assets/img/qr-cuento.png" alt="QR para leer el cuento" />
@@ -547,67 +387,25 @@
     </section>
   </main>
 
-  <!-- FOOTER / REDES SOCIALES -->
+  <!-- FOOTER -->
   <footer id="footer">
     <div class="footer-social">
-      <span>Síguenos en nuestras redes</span>
-      <a href="#" aria-label="Facebook"><img src="https://www.facebook.com/profile.php?id=61582102882479&sk=about" alt="Facebook" /></a>
-      <a href="#" aria-label="Instagram"><img src="https://www.instagram.com/elviajeparavolverami?igsh=MTE4czVyNTdyNjJzdQ==" alt="Instagram" /></a>
+      <span>Síguenos</span>
+      <a href="https://www.facebook.com/profile.php?id=61582102882479" target="_blank"><img src="assets/img/facebook-logo.png" alt="Facebook" /></a>
+      <a href="https://www.instagram.com/elviajeparavolverami" target="_blank"><img src="assets/img/instagram-logo.png" alt="Instagram" /></a>
     </div>
-    <p>Contacto: <a href="mailto:info@elviajeparami.com">elviajeparavolveramibook@gmail.com</a></p>
+    <p>Contacto: <a href="mailto:elviajeparavolveramibook@gmail.com">elviajeparavolveramibook@gmail.com</a></p>
     <p class="copyright">&copy; 2025 El viaje para volver a mí</p>
   </footer>
 
-  <!-- JS embebido -->
   <script>
-    // Aparece suavemente cada sección al hacer scroll
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.2 });
 
-    document.querySelectorAll("section, header, main").forEach(sec => {
-      observer.observe(sec);
-    });
-
-    // Animación ligera adicional en hover
-    document.querySelectorAll(".personaje").forEach(card => {
-      card.addEventListener("mouseenter", () => {
-        card.style.transform = "translateY(-10px)";
-      });
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "translateY(0)";
-      });
-    });
-
-    // Marca el enlace activo en el menú según la URL
-    const currentPage = window.location.pathname.split("/").pop();
-    const navLinks = document.querySelectorAll(".nav-links a");
-    navLinks.forEach(link => {
-      if (link.getAttribute("href") === currentPage) {
-        link.classList.add("active");
-      }
-    });
-
-    // Efecto de fade al cargar
-    window.addEventListener("load", () => {
-      document.body.style.opacity = "1";
-      document.body.style.transition = "opacity 0.8s ease-in";
-    });
-
-    // Suavizar desplazamiento interno (si se agregan anclas internas)
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth" });
-        }
-      });
-    });
+    document.querySelectorAll("section, header, footer").forEach(sec => observer.observe(sec));
   </script>
 </body>
 </html>

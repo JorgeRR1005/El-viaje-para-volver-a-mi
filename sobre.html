@@ -25,40 +25,82 @@
       overflow-x: hidden;
     }
 
-    /* NAVBAR */
-    .navbar {
-      background: var(--blanco);
-      box-shadow: var(--sombra);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 1.5rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .navbar .logo {
-      font-weight: 700;
-      color: var(--morado);
-      text-decoration: none;
-      font-size: 1.1rem;
-    }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1rem;
-      margin: 0;
-      padding: 0;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--negro);
-      position: relative;
-    }
-    .nav-links a.active,
-    .nav-links a:hover {
-      color: var(--morado);
-    }
+   /* MENÚ DE NAVEGACIÓN (igual al index) */
+.main-nav {
+  background: var(--blanco);
+  box-shadow: 0 2px 12px rgba(135, 111, 141, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1.5rem;
+}
+.logo {
+  font-weight: 700;
+  color: var(--morado);
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+.nav-links li {
+  display: inline-block;
+}
+.nav-links a {
+  color: var(--negro);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.3rem 0.2rem;
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-links a::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 0;
+  background: var(--morado);
+  transition: width 0.3s;
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--morado);
+}
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+@media (max-width: 900px) {
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.7rem 0.7rem;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+  .logo {
+    margin-bottom: 0.3rem;
+  }
+}
 
     /* HERO */
     .sub-hero {
@@ -159,37 +201,57 @@
       background: var(--morado);
       color: var(--blanco);
       text-align: center;
-      padding: 2rem 1rem 1rem;
-      border-radius: 24px 24px 0 0;
-      margin-top: 3rem;
+      padding: 3rem 1rem 1rem 1rem;
+      border-radius: 32px 32px 0 0;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    }
+    .footer-social {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      font-size: 1.1rem;
+    }
+    .footer-social span {
+      color: var(--beige);
+      font-weight: 600;
+    }
+    .footer-social img {
+      width: 32px;
+      height: 32px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.3s;
+    }
+    .footer-social a:hover img {
+      transform: scale(1.2) rotate(-8deg);
     }
     footer a {
       color: var(--beige);
       text-decoration: underline;
     }
-
-    @media (max-width: 800px) {
-      .bloque {
-        grid-template-columns: 1fr;
-      }
-      .bloque-duo {
-        flex-direction: column;
-      }
+    footer .copyright {
+      margin-top: 0.7rem;
+      font-size: 0.95rem;
+      color: #e7e7e7;
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <a href="index.html" class="logo">El viaje para volver a mí</a>
+  <!-- Menú de navegación principal -->
+<nav class="main-nav" aria-label="Navegación principal">
+  <div class="nav-container">
+    <span class="logo">El viaje para volver a mí</span>
     <ul class="nav-links">
       <li><a href="index.html">Inicio</a></li>
-      <li><a href="sobre.html" class="active">Sobre el Proyecto</a></li>
+      <li><a href="sobre.html" class="active">Sobre el proyecto</a></li>
       <li><a href="padres.html">Espacio para padres</a></li>
       <li><a href="opiniones.html">Opiniones</a></li>
     </ul>
-  </nav>
+  </div>
+</nav>
+
 
   <!-- HERO -->
   <header class="sub-hero">
@@ -249,17 +311,21 @@
           Este proyecto nació de una pregunta sencilla pero poderosa: <em>¿cómo explicar el duelo a un niño?</em> En el intento de responderla, descubrimos que los cuentos, las metáforas y los personajes podían convertirse en guías. Así, Sky apareció en nuestras páginas: un niño que, con un bolso y mucha confusión, se enfrenta a la negación, la ira, la tristeza y, poco a poco, encuentra la aceptación.
         </p>
         <p>
-          <strong>El viaje para volver a mí</strong> no es solo un libro ni una página web; es un puente. Un abrazo convertido en ilustraciones, palabras y experiencias que invitan a reconocer que cada emoción, incluso la más dolorosa, guarda una llave para seguir adelante.
+          <strong>El viaje para volver a mí</strong> no es solo un libro ; es un puente. Un abrazo convertido en ilustraciones, palabras y experiencias que invitan a reconocer que cada emoción, incluso la más dolorosa, guarda una llave para seguir adelante.
         </p>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>Síguenos en <a href="#">Facebook</a> y <a href="#">Instagram</a></p>
-    <p>Contacto: info@elviajeparami.com</p>
-    <p>© 2025 El viaje para volver a mí. Todos los derechos reservados.</p>
+   <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-social">
+      <span>Síguenos</span>
+      <a href="https://www.facebook.com/profile.php?id=61582102882479" target="_blank"><img src="assets/img/facebook-logo.png" alt="Facebook" /></a>
+      <a href="https://www.instagram.com/elviajeparavolverami" target="_blank"><img src="assets/img/instagram-logo.png" alt="Instagram" /></a>
+    </div>
+    <p>Contacto: <a href="mailto:elviajeparavolveramibook@gmail.com">elviajeparavolveramibook@gmail.com</a></p>
+    <p class="copyright">&copy; 2025 El viaje para volver a mí</p>
   </footer>
 
   <!-- ANIMACIONES -->
