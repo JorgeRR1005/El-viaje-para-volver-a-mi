@@ -4,165 +4,222 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guía para Padres | El viaje para volver a mí</title>
-  <meta name="description" content="Guía breve para padres sobre cómo acompañar a los niños en el proceso de duelo a través de la historia de Sky y sus emociones.">
-  <!-- CSS embebido -->
+  <meta name="description" content="Guía breve para acompañar a los niños en el duelo y las emociones.">
   <style>
     :root {
       --gris: #C9C8D2;
       --beige: #E7BFA1;
       --rosa: #D49EAF;
       --morado: #876F8D;
-      --verde1: #C1E1AF;
-      --verde2: #AAC893;
       --blanco: #fff;
       --negro: #222;
-      --sombra: 0 4px 24px rgba(135, 111, 141, 0.08);
+      --sombra: 0 4px 20px rgba(0,0,0,0.08);
       --transicion: 0.5s cubic-bezier(.4,0,.2,1);
     }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', Arial, sans-serif;
       background: var(--gris);
       color: var(--negro);
-      min-height: 100vh;
-      scroll-behavior: smooth;
-    }
-    body, html {
-      width: 100vw;
-      max-width: 100vw;
       overflow-x: hidden;
     }
-  /* MENÚ DE NAVEGACIÓN (igual al index) */
-.main-nav {
-  background: var(--blanco);
-  box-shadow: 0 2px 12px rgba(135, 111, 141, 0.06);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-}
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.7rem 1.5rem;
-}
-.logo {
-  font-weight: 700;
-  color: var(--morado);
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-}
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.2rem;
-  margin: 0;
-  padding: 0;
-}
-.nav-links li {
-  display: inline-block;
-}
-.nav-links a {
-  color: var(--negro);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 0.3rem 0.2rem;
-  position: relative;
-  transition: color 0.2s;
-}
-.nav-links a::after {
-  content: "";
-  display: block;
-  height: 2px;
-  width: 0;
-  background: var(--morado);
-  transition: width 0.3s;
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-}
-.nav-links a:hover,
-.nav-links a.active {
-  color: var(--morado);
-}
-.nav-links a:hover::after,
-.nav-links a.active::after {
-  width: 100%;
-}
-@media (max-width: 900px) {
-  .nav-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-    padding: 0.7rem 0.7rem;
-  }
-  .nav-links {
-    flex-wrap: wrap;
-    gap: 0.7rem;
-  }
-  .logo {
-    margin-bottom: 0.3rem;
-  }
-}
 
+    /* NAVBAR */
+    .main-nav {
+      background: var(--blanco);
+      box-shadow: 0 2px 12px rgba(135,111,141,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1.5rem;
+      position: relative;
+    }
+    .logo {
+      font-weight: 700;
+      color: var(--morado);
+      font-size: 1.1rem;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      color: var(--negro);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      width: 0;
+      background: var(--morado);
+      transition: width 0.3s;
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--morado);
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    /* Botón hamburguesa */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 25px;
+      height: 20px;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: var(--morado);
+      border-radius: 3px;
+      transition: all 0.3s;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* NAV móvil */
+    @media (max-width: 900px) {
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--blanco);
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        display: none;
+      }
+      .nav-links.open {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* HERO */
     .sub-hero {
-      background: linear-gradient(120deg, var(--rosa) 60%, var(--beige) 100%);
+      background: linear-gradient(120deg, var(--rosa) 40%, var(--beige) 100%);
       color: var(--blanco);
       text-align: center;
       padding: 3rem 1rem 2rem 1rem;
       border-radius: 0 0 32px 32px;
       box-shadow: var(--sombra);
-      margin-bottom: 2rem;
     }
     .sub-hero h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.7rem;
-      font-weight: 700;
+      font-size: 2.3rem;
+      margin-bottom: 0.5rem;
     }
     .sub-hero p {
       font-size: 1.15rem;
+      max-width: 700px;
       margin: 0 auto;
-      max-width: 600px;
       line-height: 1.6;
     }
-    main {
+
+    /* LIBRO */
+    .book {
       max-width: 900px;
-      margin: 0 auto 2rem auto;
-      padding: 0 1rem;
-      box-sizing: border-box;
+      margin: 2rem auto 4rem;
+      background: var(--beige);
+      border-radius: 20px;
+      box-shadow: var(--sombra);
+      overflow: hidden;
+      position: relative;
     }
-    main h2 {
+    .page {
+      display: none;
+      padding: 2rem;
+      animation: fadePage 0.6s ease;
+    }
+    .page.active {
+      display: block;
+    }
+    @keyframes fadePage {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .page h2 {
       color: var(--morado);
-      font-size: 1.5rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
+      margin-top: 0;
+      font-size: 1.6rem;
     }
-    main p, main li {
-      font-size: 1.08rem;
+    .page p, .page li {
+      font-size: 1.05rem;
       line-height: 1.7;
       color: #333;
     }
-    .padres-consejos,
-    .padres-final,
-    .padres-intro {
-      background: var(--beige);
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(135, 111, 141, 0.08);
-      padding: 1.5rem 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .consejos-lista {
+    .page ul {
       padding-left: 1.2rem;
-      margin: 0.5rem 0 0 0;
     }
-    .consejos-lista li {
-      margin-bottom: 0.7rem;
+
+    /* BOTONES NAVEGACIÓN */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      background: var(--rosa);
     }
+    .btn-nav {
+      background: var(--blanco);
+      color: var(--morado);
+      border: none;
+      border-radius: 40px;
+      padding: 0.6rem 1.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+    .btn-nav:hover {
+      background: var(--morado);
+      color: var(--blanco);
+      transform: scale(1.05);
+    }
+
     /* FOOTER */
     footer {
       background: var(--morado);
@@ -178,11 +235,6 @@
       align-items: center;
       justify-content: center;
       gap: 1.2rem;
-      font-size: 1.1rem;
-    }
-    .footer-social span {
-      color: var(--beige);
-      font-weight: 600;
     }
     .footer-social img {
       width: 32px;
@@ -197,115 +249,105 @@
       color: var(--beige);
       text-decoration: underline;
     }
-    footer .copyright {
-      margin-top: 0.7rem;
-      font-size: 0.95rem;
-      color: #e7e7e7;
-    }
-    section, .sub-hero {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity var(--transicion), transform var(--transicion);
-    }
-    section.visible, .sub-hero.visible {
-      opacity: 1;
-      transform: none;
-    }
-    @media (max-width: 800px) {
-      .navbar {
+
+    /* MOBILE OPTIMIZATIONS */
+    @media (max-width: 700px) {
+      .sub-hero h1 { font-size: 1.9rem; }
+      .page { padding: 1.5rem; }
+      .nav-buttons {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-        padding: 0.7rem 0.7rem;
+        gap: 1rem;
       }
-      .navbar .nav-links {
-        flex-wrap: wrap;
-        gap: 0.7rem;
+      .btn-nav {
+        width: 80%;
+        text-align: center;
       }
-      main {
-        padding: 0 0.5rem;
-      }
-    }
-    @media (max-width: 600px) {
-      .sub-hero {
-        padding: 2rem 0.5rem 1.2rem 0.5rem;
-      }
-      .padres-consejos,
-      .padres-final,
-      .padres-intro {
-        padding: 1rem 0.5rem;
-      }
-    }
-    section, .sub-hero, footer {
-      box-sizing: border-box;
-      width: 100%;
-      max-width: 100vw;
-      margin-left: auto;
-      margin-right: auto;
-      overflow-x: hidden;
     }
   </style>
 </head>
 
 <body>
 
- <!-- Menú de navegación principal -->
-<nav class="main-nav" aria-label="Navegación principal">
-  <div class="nav-container">
-    <span class="logo">El viaje para volver a mí</span>
-    <ul class="nav-links">
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="sobre.html">Sobre el proyecto</a></li>
-      <li><a href="padres.html" class="active">Espacio para padres</a></li>
-      <li><a href="opiniones.html">Opiniones</a></li>
-    </ul>
-  </div>
-</nav>
+  <!-- NAV -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <span class="logo">El viaje para volver a mí</span>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="sobre.html">Sobre el proyecto</a></li>
+        <li><a href="padres.html" class="active">Espacio para padres</a></li>
+        <li><a href="opiniones.html">Opiniones</a></li>
+      </ul>
+    </div>
+  </nav>
 
-
-  <!-- ENCABEZADO -->
+  <!-- HERO -->
   <header class="sub-hero">
-    <h1>Guía para padres</h1>
-    <p>Un acompañamiento sensible para quienes ayudan a los niños a transitar el duelo.</p>
+    <h1>Guía Breve para Acompañar a los Niños en el Duelo y las Emociones</h1>
+    <p>Un espacio para orientarte en el acompañamiento emocional durante los procesos de pérdida infantil.</p>
   </header>
 
-  <main id="padres">
-
-    <!-- INTRODUCCIÓN -->
-    <section class="padres-intro">
-      <p>
-        Esta guía busca ofrecer una orientación breve a los padres, madres y cuidadores 
-        que acompañan a niños en procesos de pérdida. 
-        Desde <strong>El viaje para volver a mí</strong>, creemos que hablar de las emociones 
-        con empatía y sin miedo puede ser el primer paso hacia la sanación.
-      </p>
+  <!-- LIBRO -->
+  <main class="book">
+    <section class="page active">
+      <h2>Comprender el Duelo Infantil</h2>
+      <p>El duelo en la niñez va más allá de la pérdida de un ser querido. Puede surgir ante divorcios, mudanzas o la pérdida de una mascota. Tu papel como adulto es ofrecer seguridad, contención y orientación.</p>
     </section>
 
-    <!-- CONSEJOS PRÁCTICOS -->
-    <section class="padres-consejos">
-      <h2>Recomendaciones clave</h2>
-      <ul class="consejos-lista">
-        <li><strong>Escucha activa:</strong> Permite que el niño exprese lo que siente sin interrumpirlo ni corregirlo.</li>
-        <li><strong>Valida sus emociones:</strong> No minimices el dolor. Decir “está bien sentirse triste” ayuda a construir confianza.</li>
-        <li><strong>Usa el cuento como puente:</strong> A través de Sky y sus emociones, puedes iniciar conversaciones naturales sobre el duelo.</li>
-        <li><strong>Evita frases vacías:</strong> En lugar de “no llores” o “ya pasará”, ofrece presencia y comprensión.</li>
-        <li><strong>Crea rutinas de apoyo:</strong> Pequeños rituales o actividades en memoria del ser querido pueden ayudar al niño a elaborar su pérdida.</li>
+    <section class="page">
+      <h2>3 Pilares del Acompañamiento Emocional</h2>
+      <ul>
+        <li><strong>Presencia:</strong> estar disponible emocionalmente.</li>
+        <li><strong>Verdad:</strong> hablar con honestidad adaptada a su edad.</li>
+        <li><strong>Amor:</strong> brindar apoyo incondicional sin juicios.</li>
       </ul>
     </section>
 
-    <!-- SECCIÓN ADICIONAL -->
-    <section class="padres-final">
-      <h2>Recuerda</h2>
-      <p>
-        Acompañar a un niño en el duelo no significa borrar su tristeza, sino ofrecerle un lugar seguro 
-        donde aprender que todas las emociones tienen sentido. 
-        La aceptación llega con el tiempo y con amor constante.
-      </p>
+    <section class="page">
+      <h2>Señales de que un Niño Está en Duelo</h2>
+      <ul>
+        <li><strong>Emociones intensas:</strong> tristeza, miedo o ira.</li>
+        <li><strong>Cambios de conducta:</strong> agresividad o complacencia.</li>
+        <li><strong>Aislamiento:</strong> retraimiento o indiferencia.</li>
+        <li><strong>Dificultades escolares:</strong> falta de concentración.</li>
+        <li><strong>Regresión:</strong> conductas de etapas previas.</li>
+      </ul>
     </section>
 
+    <section class="page">
+      <h2>4 Claves para Fortalecer su Inteligencia Emocional</h2>
+      <ul>
+        <li><strong>Crea un espacio seguro:</strong> permite la expresión sin juicios.</li>
+        <li><strong>Ponle nombre a las emociones:</strong> ayuda a identificarlas.</li>
+        <li><strong>Fomenta la expresión creativa:</strong> juego, dibujo o cuentos.</li>
+        <li><strong>Establece rutinas y límites:</strong> estructura y seguridad.</li>
+      </ul>
+    </section>
+
+    <section class="page">
+      <h2>7 Consejos Prácticos</h2>
+      <ul>
+        <li><strong>Sé un reflejo, no un juez.</strong></li>
+        <li><strong>Usa lenguaje claro:</strong> evita eufemismos.</li>
+        <li><strong>Mantén la rutina:</strong> genera seguridad.</li>
+        <li><strong>Expresión por escrito o dibujo.</strong></li>
+        <li><strong>Permite la regresión temporal.</strong></li>
+        <li><strong>Sé consistente con los límites.</strong></li>
+        <li><strong>Cuida tu propio duelo.</strong></li>
+      </ul>
+      <p><strong>Recuerda:</strong> si el duelo se complica, busca apoyo profesional.</p>
+    </section>
+
+    <div class="nav-buttons">
+      <button class="btn-nav" id="prevBtn">← Anterior</button>
+      <button class="btn-nav" id="nextBtn">Siguiente →</button>
+    </div>
   </main>
 
-   <!-- FOOTER -->
+  <!-- FOOTER -->
   <footer id="footer">
     <div class="footer-social">
       <span>Síguenos</span>
@@ -316,45 +358,37 @@
     <p class="copyright">&copy; 2025 El viaje para volver a mí</p>
   </footer>
 
-  <!-- JS embebido -->
   <script>
-    // Animación de entrada para secciones y header
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll("section, header").forEach(sec => {
-      observer.observe(sec);
+    // Menú hamburguesa
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
     });
 
-    // Marca el enlace activo en el menú según la URL
-    const currentPage = window.location.pathname.split("/").pop();
-    const navLinks = document.querySelectorAll(".nav-links a");
-    navLinks.forEach(link => {
-      if (link.getAttribute("href") === currentPage) {
-        link.classList.add("active");
-      }
+    // Navegación del libro
+    const pages = document.querySelectorAll('.page');
+    let currentPage = 0;
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+
+    function showPage(i) {
+      pages.forEach((p, idx) => p.classList.toggle('active', idx === i));
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < pages.length - 1) currentPage++;
+      showPage(currentPage);
+    });
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 0) currentPage--;
+      showPage(currentPage);
     });
 
-    // Efecto de fade al cargar
-    window.addEventListener("load", () => {
-      document.body.style.opacity = "1";
-      document.body.style.transition = "opacity 0.8s ease-in";
-    });
-
-    // Suavizar desplazamiento interno (si se agregan anclas internas)
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth" });
-        }
-      });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') nextBtn.click();
+      if (e.key === 'ArrowLeft') prevBtn.click();
     });
   </script>
 </body>

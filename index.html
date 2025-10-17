@@ -10,8 +10,6 @@
       --beige: #E7BFA1;
       --rosa: #D49EAF;
       --morado: #876F8D;
-      --verde1: #C1E1AF;
-      --verde2: #AAC893;
       --blanco: #fff;
       --negro: #222;
       --sombra: 0 4px 24px rgba(135, 111, 141, 0.08);
@@ -30,10 +28,10 @@
     /* NAVBAR */
     .main-nav {
       background: var(--blanco);
-      box-shadow: 0 2px 12px rgba(135, 111, 141, 0.06);
+      box-shadow: 0 2px 12px rgba(135,111,141,0.06);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
       width: 100%;
     }
     .nav-container {
@@ -43,6 +41,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0.7rem 1.5rem;
+      position: relative;
     }
     .logo {
       font-weight: 700;
@@ -84,34 +83,87 @@
       width: 100%;
     }
 
+    /* Botón hamburguesa */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 25px;
+      height: 20px;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: var(--morado);
+      border-radius: 3px;
+      transition: all 0.3s;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* NAV MÓVIL */
+    @media (max-width: 900px) {
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--blanco);
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        display: none;
+      }
+      .nav-links.open {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
     /* HERO */
     .hero {
-      background: linear-gradient(120deg, var(--rosa), var(--beige), var(--rosa));
-      background-size: 300% 300%;
-      animation: heroGradient 10s ease infinite;
+      background: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url("assets/img/fondo-hero.png") center/100% no-repeat;
+      background-attachment: scroll;
       color: var(--blanco);
       text-align: center;
       padding: 6rem 1rem 3.5rem 1rem;
       border-radius: 0 0 40px 40px;
-      box-shadow: 0 6px 20px rgba(135, 111, 141, 0.25);
+      box-shadow: 0 6px 20px rgba(135,111,141,0.25);
       position: relative;
-    }
-    @keyframes heroGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      filter: brightness(0.85);
     }
     .hero h1 {
       font-size: 3rem;
       font-weight: 700;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      text-shadow: 0 3px 8px rgba(0,0,0,0.6);
     }
     .hero p {
       font-size: 1.2rem;
       line-height: 1.8;
       margin: 0 auto 1.2rem auto;
       max-width: 700px;
-      color: #fffdfd;
+      color: #fefefe;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
     }
     .btn-hero {
       display: inline-block;
@@ -124,7 +176,7 @@
       text-decoration: none;
       transition: all 0.3s;
       margin-top: 1.2rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
     .btn-hero:hover {
       background: var(--rosa);
@@ -137,7 +189,7 @@
       background: #F2E1B7;
       margin: 3rem auto;
       border-radius: 32px;
-      box-shadow: 0 4px 30px rgba(135, 111, 141, 0.15);
+      box-shadow: 0 4px 30px rgba(135,111,141,0.15);
       padding: 3rem 2rem;
       max-width: 1200px;
     }
@@ -171,20 +223,9 @@
       overflow: hidden;
       position: relative;
     }
-    .personaje::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(212,158,175,0.12), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .personaje:hover::before {
-      opacity: 1;
-    }
     .personaje:hover {
       transform: translateY(-12px) scale(1.03);
-      box-shadow: 0 12px 30px rgba(135, 111, 141, 0.25);
+      box-shadow: 0 12px 30px rgba(135,111,141,0.25);
     }
     .personaje-img {
       width: 150px;
@@ -199,16 +240,9 @@
       object-fit: contain;
       transition: opacity 0.5s, transform 0.5s;
     }
-    .personaje-img img.color {
-      opacity: 0;
-    }
-    .personaje:hover .personaje-img img.color {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-    .personaje:hover .personaje-img img.sombra {
-      opacity: 0;
-    }
+    .personaje-img img.color { opacity: 0; }
+    .personaje:hover .personaje-img img.color { opacity: 1; transform: scale(1.05); }
+    .personaje:hover .personaje-img img.sombra { opacity: 0; }
     .personaje-info {
       padding: 0 1rem 1rem 1rem;
       text-align: center;
@@ -231,31 +265,19 @@
       background: linear-gradient(135deg, var(--rosa) 40%, var(--morado) 100%);
       border-radius: 32px;
       color: var(--blanco);
-      box-shadow: 0 6px 24px rgba(135, 111, 141, 0.3);
+      box-shadow: 0 6px 24px rgba(135,111,141,0.3);
       margin: 3rem auto;
       padding: 3rem 2rem;
       max-width: 950px;
       position: relative;
       overflow: hidden;
     }
-    #sinopsis::before {
-      content: "";
-      position: absolute;
-      width: 250%;
-      height: 250%;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 60%);
-      animation: sinopsisGlow 10s infinite linear;
-    }
-    @keyframes sinopsisGlow {
-      0% { transform: translate(-20%, -20%) rotate(0deg); }
-      100% { transform: translate(20%, 20%) rotate(360deg); }
-    }
     #sinopsis h2 {
       font-size: 2.3rem;
       text-align: center;
       margin-bottom: 1.8rem;
-      position: relative;
       z-index: 1;
+      position: relative;
     }
     .sinopsis-flex {
       display: flex;
@@ -263,7 +285,6 @@
       align-items: center;
       justify-content: center;
       gap: 2rem;
-      position: relative;
       z-index: 1;
     }
     .sinopsis-texto {
@@ -295,11 +316,6 @@
       align-items: center;
       justify-content: center;
       gap: 1.2rem;
-      font-size: 1.1rem;
-    }
-    .footer-social span {
-      color: var(--beige);
-      font-weight: 600;
     }
     .footer-social img {
       width: 32px;
@@ -314,13 +330,15 @@
       color: var(--beige);
       text-decoration: underline;
     }
-    footer .copyright {
-      margin-top: 0.7rem;
-      font-size: 0.95rem;
-      color: #e7e7e7;
+
+    /* RESPONSIVE */
+    @media (max-width: 800px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1.05rem; }
+      .sinopsis-flex { flex-direction: column; text-align: center; }
+      .sinopsis-qr img { width: 110px; height: 110px; }
     }
 
-    /* EFECTO APARICIÓN */
     section, .hero, footer {
       opacity: 0;
       transform: translateY(30px);
@@ -330,19 +348,18 @@
       opacity: 1;
       transform: translateY(0);
     }
-
-    @media (max-width: 700px) {
-      .hero h1 { font-size: 2.2rem; }
-      .sinopsis-qr img { width: 100px; height: 100px; }
-    }
   </style>
 </head>
 <body>
-  <!-- Menú de navegación principal -->
-  <nav class="main-nav" aria-label="Navegación principal">
+
+  <!-- NAV -->
+  <nav class="main-nav">
     <div class="nav-container">
       <span class="logo">El viaje para volver a mí</span>
-      <ul class="nav-links">
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-links" id="nav-links">
         <li><a href="index.html" class="active">Inicio</a></li>
         <li><a href="sobre.html">Sobre el proyecto</a></li>
         <li><a href="padres.html">Espacio para padres</a></li>
@@ -361,16 +378,7 @@
   </header>
 
   <!-- PERSONAJES -->
-  <main>
-    <section id="personajes">
-      <h2>Conoce a nuestros personajes</h2>
-      <div class="personajes-grid">
-        <!-- Aquí permanecen los personajes como en tu versión original -->
-        <!-- ... (puedes mantener los mismos divs de personajes sin cambios) -->
-         <!-- Sky --> <div class="personaje" tabindex="0"> 
-          <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_sky%20.png" alt="Sky sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_sky%20.png" alt="Sky color" class="color" /> </div> <div class="personaje-info"> <strong>Sky</strong> <p>“Soy Sky y tengo 9 años. Mi mundo cambió de repente y ya nada se siente igual. A veces me pierdo entre emociones que no entiendo, pero sé que este viaje me ayudará a encontrar respuestas. Llevo mi mochila conmigo, porque en cada paso guardo algo que me acerca a comprender lo que siento.”</p> </div> </div> <!-- Negación --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Negacion.png" alt="Negación sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Negacion.png" alt="Negación color" class="color" /> </div> <div class="personaje-info"> <strong>Negación</strong> <p>“Yo soy Negación. Prefiero esconder lo que duele y hacer como que nada pasó. A veces te protejo del dolor, pero también puedo detenerte si no te atreves a mirar la verdad.”</p> </div> </div> <!-- Verdad --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Verdad.png" alt="Verdad sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Verdad.png" alt="Verdad color" class="color" /> </div> <div class="personaje-info"> <strong>Verdad</strong> <p>“Me llamo Verdad. No siempre soy fácil de escuchar, pero traigo claridad. Estoy aquí para recordarte lo que ocurrió, aunque duela, porque solo aceptando lo real podemos avanzar.”</p> </div> </div> <!-- Ira --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_ira.png" alt="Ira sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_ira.png" alt="Ira color" class="color" /> </div> <div class="personaje-info"> <strong>Ira</strong> <p>“Soy Ira, y me hago sentir con fuerza. Grito, golpeo y ardo por dentro cuando algo no es justo. Aunque a veces asusto, también te enseño que está bien soltar lo que te enoja.”</p> </div> </div> <!-- Negociación --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Negociacion.png" alt="Negociación sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Negociacion.png" alt="Negociación color" class="color" /> </div> <div class="personaje-info"> <strong>Negociación</strong> <p>“Yo soy Negociación. Te lleno de ‘y si hubiera…’ y ‘tal vez si hago esto…’. Parezco dar esperanza, pero también puedo confundirte con caminos que no existen.”</p> </div> </div> <!-- Depresión --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Depresion.png" alt="Depresión sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Depresion.png" alt="Depresión color" class="color" /> </div> <div class="personaje-info"> <strong>Depresión</strong> <p>“Me llamo Depresión. Camino despacio, con el corazón pesado y la mirada baja. Traigo lluvia y cansancio, pero también un silencio donde puedes escucharte a ti mismo.”</p> </div> </div> <!-- Aceptación --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Aceptacion.png" alt="Aceptación sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Aceptacion.png" alt="Aceptación color" class="color" /> </div> <div class="personaje-info"> <strong>Aceptación</strong> <p>“Soy Aceptación. No borro el dolor, pero lo transformo en calma. Llego cuando entiendes que, aunque lo que pasó duele, puedes seguir adelante con una nueva luz en tu interior.”</p> </div> </div> </div> </section>
-      </div>
-    </section>
+  <main> <section id="personajes"> <h2>Conoce a nuestros personajes</h2> <div class="personajes-grid"> <!-- Aquí permanecen los personajes como en tu versión original --> <!-- ... (puedes mantener los mismos divs de personajes sin cambios) --> <!-- Sky --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_sky%20.png" alt="Sky sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_sky%20.png" alt="Sky color" class="color" /> </div> <div class="personaje-info"> <strong>Sky</strong> <p>“Soy Sky y tengo 9 años. Mi mundo cambió de repente y ya nada se siente igual. A veces me pierdo entre emociones que no entiendo, pero sé que este viaje me ayudará a encontrar respuestas. Llevo mi mochila conmigo, porque en cada paso guardo algo que me acerca a comprender lo que siento.”</p> </div> </div> <!-- Negación --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Negacion.png" alt="Negación sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Negacion.png" alt="Negación color" class="color" /> </div> <div class="personaje-info"> <strong>Negación</strong> <p>“Yo soy Negación. Prefiero esconder lo que duele y hacer como que nada pasó. A veces te protejo del dolor, pero también puedo detenerte si no te atreves a mirar la verdad.”</p> </div> </div> <!-- Verdad --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Verdad.png" alt="Verdad sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Verdad.png" alt="Verdad color" class="color" /> </div> <div class="personaje-info"> <strong>Verdad</strong> <p>“Me llamo Verdad. No siempre soy fácil de escuchar, pero traigo claridad. Estoy aquí para recordarte lo que ocurrió, aunque duela, porque solo aceptando lo real podemos avanzar.”</p> </div> </div> <!-- Ira --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_ira.png" alt="Ira sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_ira.png" alt="Ira color" class="color" /> </div> <div class="personaje-info"> <strong>Ira</strong> <p>“Soy Ira, y me hago sentir con fuerza. Grito, golpeo y ardo por dentro cuando algo no es justo. Aunque a veces asusto, también te enseño que está bien soltar lo que te enoja.”</p> </div> </div> <!-- Negociación --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Negociacion.png" alt="Negociación sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Negociacion.png" alt="Negociación color" class="color" /> </div> <div class="personaje-info"> <strong>Negociación</strong> <p>“Yo soy Negociación. Te lleno de ‘y si hubiera…’ y ‘tal vez si hago esto…’. Parezco dar esperanza, pero también puedo confundirte con caminos que no existen.”</p> </div> </div> <!-- Depresión --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Depresion.png" alt="Depresión sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Depresion.png" alt="Depresión color" class="color" /> </div> <div class="personaje-info"> <strong>Depresión</strong> <p>“Me llamo Depresión. Camino despacio, con el corazón pesado y la mirada baja. Traigo lluvia y cansancio, pero también un silencio donde puedes escucharte a ti mismo.”</p> </div> </div> <!-- Aceptación --> <div class="personaje" tabindex="0"> <div class="personaje-img"> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personaje%20sombra/Personajes%20Sombras_Aceptacion.png" alt="Aceptación sombra" class="sombra" /> <img src="assets/img/Personajes/Sombra%20%2B%20Personaje/Sombra%20%2B%20Personaje/Personajes%20sin/Personajes_Aceptacion.png" alt="Aceptación color" class="color" /> </div> <div class="personaje-info"> <strong>Aceptación</strong> <p>“Soy Aceptación. No borro el dolor, pero lo transformo en calma. Llego cuando entiendes que, aunque lo que pasó duele, puedes seguir adelante con una nueva luz en tu interior.”</p> </div> </div> </div> </section> </div> </section>
 
     <!-- SINOPSIS -->
     <section id="sinopsis">
@@ -388,23 +396,30 @@
   </main>
 
   <!-- FOOTER -->
-  <footer id="footer">
+  <footer>
     <div class="footer-social">
-      <span>Síguenos</span>
       <a href="https://www.facebook.com/profile.php?id=61582102882479" target="_blank"><img src="assets/img/facebook-logo.png" alt="Facebook" /></a>
       <a href="https://www.instagram.com/elviajeparavolverami" target="_blank"><img src="assets/img/instagram-logo.png" alt="Instagram" /></a>
     </div>
     <p>Contacto: <a href="mailto:elviajeparavolveramibook@gmail.com">elviajeparavolveramibook@gmail.com</a></p>
-    <p class="copyright">&copy; 2025 El viaje para volver a mí</p>
+    <p>&copy; 2025 El viaje para volver a mí</p>
   </footer>
 
   <script>
+    // Menú hamburguesa
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+
+    // Efecto aparición secciones
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.2 });
-
     document.querySelectorAll("section, header, footer").forEach(sec => observer.observe(sec));
   </script>
 </body>
