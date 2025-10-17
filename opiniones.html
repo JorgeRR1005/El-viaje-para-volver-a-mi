@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Opiniones y Experiencias | El viaje para volver a mí</title>
   <meta name="description" content="Lee y comparte experiencias de padres, educadores y lectores sobre el cuento El viaje para volver a mí.">
-  <!-- CSS embebido -->
   <style>
     :root {
       --gris: #C9C8D2;
@@ -13,7 +12,6 @@
       --rosa: #D49EAF;
       --morado: #876F8D;
       --verde1: #C1E1AF;
-      --verde2: #AAC893;
       --blanco: #fff;
       --negro: #222;
       --sombra: 0 4px 24px rgba(135, 111, 141, 0.08);
@@ -24,99 +22,142 @@
       font-family: 'Segoe UI', Arial, sans-serif;
       background: var(--gris);
       color: var(--negro);
-      min-height: 100vh;
       scroll-behavior: smooth;
-    }
-    body, html {
-      width: 100vw;
-      max-width: 100vw;
       overflow-x: hidden;
     }
-    /* MENÚ DE NAVEGACIÓN (idéntico al index) */
-.main-nav {
-  background: var(--blanco);
-  box-shadow: 0 2px 12px rgba(135, 111, 141, 0.06);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-}
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.7rem 1.5rem;
-}
-.logo {
-  font-weight: 700;
-  color: var(--morado);
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-}
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.2rem;
-  margin: 0;
-  padding: 0;
-}
-.nav-links li {
-  display: inline-block;
-}
-.nav-links a {
-  color: var(--negro);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 0.3rem 0.2rem;
-  position: relative;
-  transition: color 0.2s;
-}
-.nav-links a::after {
-  content: "";
-  display: block;
-  height: 2px;
-  width: 0;
-  background: var(--morado);
-  transition: width 0.3s;
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-}
-.nav-links a:hover,
-.nav-links a.active {
-  color: var(--morado);
-}
-.nav-links a:hover::after,
-.nav-links a.active::after {
-  width: 100%;
-}
-@media (max-width: 900px) {
-  .nav-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-    padding: 0.7rem 0.7rem;
-  }
-  .nav-links {
-    flex-wrap: wrap;
-    gap: 0.7rem;
-  }
-  .logo {
-    margin-bottom: 0.3rem;
-  }
-}
 
+    /* NAVBAR */
+    .main-nav {
+      background: var(--blanco);
+      box-shadow: 0 2px 12px rgba(135,111,141,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1.5rem;
+      position: relative;
+    }
+    .logo {
+      font-weight: 700;
+      color: var(--morado);
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      color: var(--negro);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.3rem 0.2rem;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .nav-links a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      width: 0;
+      background: var(--morado);
+      transition: width 0.3s;
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--morado);
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    /* Botón hamburguesa */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 25px;
+      height: 20px;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: var(--morado);
+      border-radius: 3px;
+      transition: all 0.3s;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--blanco);
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        display: none;
+      }
+      .nav-links.open {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* HERO */
     .sub-hero {
       background: linear-gradient(120deg, var(--rosa) 60%, var(--beige) 100%);
       color: var(--blanco);
       text-align: center;
-      padding: 3rem 1rem 2rem 1rem;
+      padding: 3rem 1rem 2rem;
       border-radius: 0 0 32px 32px;
       box-shadow: var(--sombra);
       margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity var(--transicion), transform var(--transicion);
+    }
+    .sub-hero.visible {
+      opacity: 1;
+      transform: none;
     }
     .sub-hero h1 {
       font-size: 2.2rem;
@@ -129,9 +170,10 @@
       max-width: 600px;
       line-height: 1.6;
     }
+
     main {
       max-width: 900px;
-      margin: 0 auto 2rem auto;
+      margin: 0 auto 2rem;
       padding: 0 1rem;
       box-sizing: border-box;
     }
@@ -142,21 +184,12 @@
       margin-bottom: 1rem;
       font-weight: 700;
     }
-    main h3 {
-      color: var(--morado);
-      font-size: 1.2rem;
-      margin-top: 1.5rem;
-      margin-bottom: 0.7rem;
-      font-weight: 600;
-    }
-    main p, main li {
+    main p {
       font-size: 1.08rem;
       line-height: 1.7;
       color: #333;
     }
-    .opiniones-lista {
-      margin-bottom: 2.5rem;
-    }
+
     .testimonios-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -166,15 +199,10 @@
     .testimonio {
       background: var(--beige);
       border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(135, 111, 141, 0.08);
+      box-shadow: var(--sombra);
       padding: 1.2rem 1rem;
       font-style: italic;
       color: var(--morado);
-      position: relative;
-      min-height: 120px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
     }
     .testimonio .autor {
       display: block;
@@ -184,15 +212,13 @@
       font-style: normal;
       font-weight: 500;
     }
+
     .formulario-opinion {
       background: var(--verde1);
       border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(135, 111, 141, 0.08);
-      padding: 2rem 1rem 1.5rem 1rem;
+      box-shadow: var(--sombra);
+      padding: 2rem 1rem;
       margin-top: 2rem;
-    }
-    .formulario-opinion h2 {
-      margin-top: 0;
     }
     .form-opinion {
       display: flex;
@@ -231,7 +257,8 @@
       background: var(--rosa);
       transform: scale(1.04);
     }
-     /* FOOTER */
+
+    /* FOOTER */
     footer {
       background: var(--morado);
       color: var(--blanco);
@@ -246,11 +273,6 @@
       align-items: center;
       justify-content: center;
       gap: 1.2rem;
-      font-size: 1.1rem;
-    }
-    .footer-social span {
-      color: var(--beige);
-      font-weight: 600;
     }
     .footer-social img {
       width: 32px;
@@ -265,97 +287,67 @@
       color: var(--beige);
       text-decoration: underline;
     }
-    footer .copyright {
-      margin-top: 0.7rem;
-      font-size: 0.95rem;
-      color: #e7e7e7;
+
+    /* RESPONSIVE OPTIMIZATION */
+    @media (max-width: 700px) {
+      .sub-hero {
+        padding: 2.5rem 1rem 1.5rem;
+        border-radius: 0 0 24px 24px;
+      }
+      .sub-hero h1 { font-size: 1.8rem; }
+      .sub-hero p { font-size: 1rem; line-height: 1.5; }
+      .testimonios-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .formulario-opinion { padding: 1.5rem 0.8rem; }
+      .btn-principal { font-size: 1rem; padding: 0.7rem 1.2rem; }
     }
-    section, .sub-hero {
+
+    section, .sub-hero, footer {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity var(--transicion), transform var(--transicion);
     }
-    section.visible, .sub-hero.visible {
+    section.visible, .sub-hero.visible, footer.visible {
       opacity: 1;
       transform: none;
     }
-    @media (max-width: 800px) {
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-        padding: 0.7rem 0.7rem;
-      }
-      .navbar .nav-links {
-        flex-wrap: wrap;
-        gap: 0.7rem;
-      }
-      .testimonios-grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-      }
-      main {
-        padding: 0 0.5rem;
-      }
-    }
-    @media (max-width: 600px) {
-      .sub-hero {
-        padding: 2rem 0.5rem 1.2rem 0.5rem;
-      }
-      .formulario-opinion {
-        padding: 1rem 0.5rem;
-      }
-    }
-    section, .sub-hero, footer {
-      box-sizing: border-box;
-      width: 100%;
-      max-width: 100vw;
-      margin-left: auto;
-      margin-right: auto;
-      overflow-x: hidden;
-    }
   </style>
 </head>
-
 <body>
 
- <!-- Menú de navegación principal -->
-<nav class="main-nav" aria-label="Navegación principal">
-  <div class="nav-container">
-    <span class="logo">El viaje para volver a mí</span>
-    <ul class="nav-links">
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="sobre.html">Sobre el proyecto</a></li>
-      <li><a href="padres.html">Espacio para padres</a></li>
-      <li><a href="opiniones.html" class="active">Opiniones</a></li>
-    </ul>
-  </div>
-</nav>
+  <!-- NAV -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <span class="logo">El viaje para volver a mí</span>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="sobre.html">Sobre el proyecto</a></li>
+        <li><a href="padres.html">Espacio para padres</a></li>
+        <li><a href="opiniones.html" class="active">Opiniones</a></li>
+      </ul>
+    </div>
+  </nav>
 
-
-  <!-- ENCABEZADO DE PÁGINA -->
+  <!-- HERO -->
   <header class="sub-hero">
     <h1>Opiniones y Experiencias</h1>
     <p>Un espacio donde las familias, docentes y lectores pueden compartir lo que sintieron al conocer a Sky y sus emociones.</p>
   </header>
 
-  <main id="opiniones">
-
-    <!-- SECCIÓN DE TESTIMONIOS -->
+  <main>
     <section class="opiniones-lista">
       <h2>Lo que otros han compartido</h2>
-
       <div class="testimonios-grid">
         <article class="testimonio">
           <p>“Leer este cuento con mi hija nos ayudó a hablar sobre la pérdida de su abuelo. Fue un momento de conexión y sanación.”</p>
           <span class="autor">— Marta López, madre de 8 años</span>
         </article>
-
         <article class="testimonio">
           <p>“Como docente, me pareció una herramienta hermosa para trabajar emociones con mis alumnos. Las ilustraciones atrapan y el mensaje es profundo.”</p>
           <span class="autor">— Prof. Carlos Méndez</span>
         </article>
-
         <article class="testimonio">
           <p>“A través de Sky, los niños aprenden que sentir tristeza o enojo no está mal. Es una historia que abraza.”</p>
           <span class="autor">— Ana Rodríguez, psicóloga infantil</span>
@@ -363,11 +355,9 @@
       </div>
     </section>
 
-    <!-- FORMULARIO PARA NUEVAS OPINIONES -->
     <section class="formulario-opinion">
       <h2>Comparte tu experiencia</h2>
       <p>Tu testimonio puede inspirar y acompañar a otras familias.</p>
-
       <form class="form-opinion">
         <input type="text" name="nombre" placeholder="Tu nombre" required>
         <textarea name="mensaje" rows="5" placeholder="Escribe tu opinión..." required></textarea>
@@ -376,7 +366,7 @@
     </section>
   </main>
 
-   <!-- FOOTER -->
+  <!-- FOOTER -->
   <footer id="footer">
     <div class="footer-social">
       <span>Síguenos</span>
@@ -387,46 +377,20 @@
     <p class="copyright">&copy; 2025 El viaje para volver a mí</p>
   </footer>
 
-  <!-- JS embebido -->
   <script>
-    // Animación de entrada para secciones y header
-    const observer = new IntersectionObserver((entries) => {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.2 });
-
-    document.querySelectorAll("section, header").forEach(sec => {
-      observer.observe(sec);
-    });
-
-    // Marca el enlace activo en el menú según la URL
-    const currentPage = window.location.pathname.split("/").pop();
-    const navLinks = document.querySelectorAll(".nav-links a");
-    navLinks.forEach(link => {
-      if (link.getAttribute("href") === currentPage) {
-        link.classList.add("active");
-      }
-    });
-
-    // Efecto de fade al cargar
-    window.addEventListener("load", () => {
-      document.body.style.opacity = "1";
-      document.body.style.transition = "opacity 0.8s ease-in";
-    });
-
-    // Suavizar desplazamiento interno (si se agregan anclas internas)
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth" });
-        }
-      });
-    });
+    document.querySelectorAll("section, header, footer").forEach(sec => observer.observe(sec));
   </script>
 </body>
 </html>
